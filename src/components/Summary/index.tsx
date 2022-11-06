@@ -2,8 +2,15 @@ import { Container } from './styles'
 import Icomming from '../../assets/entradas.svg';
 import OutComming from '../../assets/saidas.svg';
 import TotalIcomming from '../../assets/total.svg';
+import { useContext } from 'react';
+import { TransactionContext } from '../../TransactionsContext';
  export default function Summary(){
+    const data = useContext(TransactionContext)
+    
+    console.log(data.length)
+    
     return(
+        
        <Container>
             <div>
                 <header>

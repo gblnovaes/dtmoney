@@ -45,6 +45,14 @@ createServer({
           category: 'Despesas',
           amount:4999,
           created: new Date("2022-10-20")
+        },
+        {
+          id:5,
+          title: "Pagamento de Spotify",
+          type:'withdraw',
+          category: 'Despesas',
+          amount:29.90,
+          created: new Date("2022-11-20")
         }
           
       ]
