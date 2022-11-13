@@ -5,9 +5,9 @@ import TotalIcomming from '../../assets/total.svg';
 import { useContext } from 'react';
 import { TransactionContext } from '../../TransactionsContext';
  export default function Summary(){
-    const data = useContext(TransactionContext)
+    const {transactions} = useContext(TransactionContext)
     
-    console.log(data.length)
+    console.log(transactions.length)
     
     return(
         

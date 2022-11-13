@@ -5,8 +5,9 @@ import { Container ,TransactionTypeContainer,RadioBox} from './styles';
 import closeImg from '../../assets/close.svg'
 import Incoming from '../../assets/entradas.svg'
 import Outcoming from '../../assets/saidas.svg'
-import { FormEvent, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 import { api } from '../../services/api';
+import { TransactionContext } from '../../TransactionsContext';
  
 interface NewTransactionModalProps{
     isOpen: boolean
@@ -20,20 +21,21 @@ export function NewModalTransaction({isOpen,onRequestClose} : NewTransactionModa
     const [type,setType] = useState('deposit')
     const [title,setTitle] = useState('')
     const [category,setCategory] = useState('')
-    const [value,setValue] = useState(0)
+    const [amount,setAmount] = useState(0)
+
+    const {createTransaction} = useContext(TransactionContext)
     
     function handleCreateNewTransaction(event : FormEvent){
         event.preventDefault()
         
-        const data = {
+        createTransaction({
             title,
-            value,
-            category,
-            type
-        }
-        
-        api.post('/transactions', data)
+            type,
+            amount,
+            category
+        })
             
+        onRequestClose()
     }
     
     return(
@@ -54,7 +56,7 @@ export function NewModalTransaction({isOpen,onRequestClose} : NewTransactionModa
             <Container onSubmit={handleCreateNewTransaction}>
                 <h2>Cadastrar Nova transacao</h2>
                 <input type="text"  placeholder='Titulo'  value={title} onChange={(event) => setTitle(event.target.value)}/>
-                <input type="number" placeholder='Valor' value={value}  onChange={(event) => setValue(Number(event.target.value)) }/>
+                <input type="number" placeholder='Valor' value={amount}  onChange={(event) => setAmount(Number(event.target.value)) }/>
                 
                 <TransactionTypeContainer>
                     <RadioBox type='button' 
